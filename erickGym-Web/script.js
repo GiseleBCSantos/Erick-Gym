@@ -53,6 +53,8 @@ async function salvarExercicio(e){
 }
 
 
+
+
 async function apagarExercicio(id){
     const response = await fetch(API_URL)
 
@@ -61,6 +63,24 @@ async function apagarExercicio(id){
         for (let exercicio of exercicios){
             if (exercicio.id === id){
                 
+                const config = {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(exercicio)
+                }
+
+                const response = await fetch(API_URL, config)
+
+                if (response.status === 204){
+                    const exercicio = await response.json()
+                    adicionarItemNaLista(exercicio)
+                    alert('Exercicio deletado com sucesso!')
+                }
+                else{
+                    alert('Erro ao deletar exercicio!')
+                }  
             }
         }
     }
@@ -74,8 +94,8 @@ function adicionarItemNaLista(exercicio){
     const deletar = document.createElement('td')
     const linha = document.createElement('tr')
 
-    item_nome.innerText = `${exercicio.nome})`
-    item_descricao.innerText = `${exercicio.descricao})`
+    item_nome.innerText = `${exercicio.nome}`
+    item_descricao.innerText = `${exercicio.descricao}`
     modificar.innerHTML = `<button href="https://erick-gym.onrender.com/exercicios/api/modificar/${exercicio.id}"><i class="fa-solid fa-pen-to-square"></i></button>`
     deletar.innerHTML = `<button href="https://erick-gym.onrender.com/exercicios/api/deletar/${exercicio.id}"><i class="fa-solid fa-trash"></i></button>`
 
