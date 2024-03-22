@@ -20,5 +20,7 @@ from treinos.views import ListaExerciciosView
 
 urlpatterns = [
     path('exercicios/api', ListaExerciciosView.as_view()),
+    path('exercicios/api/modificar/<int:pk>', ListaExerciciosView.as_view()),
+    path('exercicios/api/deletar/<int:pk>', ListaExerciciosView.as_view()),
     path('admin/', admin.site.urls),
 ]
