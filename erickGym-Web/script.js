@@ -7,29 +7,29 @@ const API_URL = 'https://erick-gym.onrender.com/exercicios/api'
 
 
 
-function main(){
+function main() {
     btn_cadastro.onclick = salvarExercicio
     carregarExerciciosAPI()
 
 }
 
-async function carregarExerciciosAPI(){
+async function carregarExerciciosAPI() {
     const response = await fetch(API_URL)
-    if (response.status === 200){
+    if (response.status === 200) {
         const exercicios = await response.json()
-        for (let exercicio of exercicios){
+        for (let exercicio of exercicios) {
             adicionarItemNaLista(exercicio)
         }
     }
 }
 
 
-async function salvarExercicio(e){
+async function salvarExercicio(e) {
     e.preventDefault()
     const nome = cx_nome.value
     const descricao = cx_descricao.value
 
-    const dados = {nome, descricao}
+    const dados = { nome, descricao }
 
     const config = {
         method: 'POST',
@@ -41,12 +41,12 @@ async function salvarExercicio(e){
 
     const response = await fetch(API_URL, config)
 
-    if (response.status === 201){
+    if (response.status === 201) {
         const exercicio = await response.json()
         adicionarItemNaLista(exercicio)
         alert('Exercicio cadastrado com sucesso!')
     }
-    else{
+    else {
         alert('Erro ao cadastrar exercicio!')
     }
 
@@ -56,39 +56,23 @@ async function salvarExercicio(e){
 
 
 
-async function apagarExercicio(id){
+async function apagarExercicio(id) {
     const response = await fetch(`${API_URL}/deletar/${id}`)
 
-    if (response.status === 200){
-        const exercicios = await response.json()
-        for (let exercicio of exercicios){
-            if (exercicio.id === id){
-                
-                const config = {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(exercicio)
-                }
+    if (response.status === 204) {
 
-                const response = await fetch(API_URL, config)
-
-                if (response.status === 204){
-                    const exercicio = await response.json()
-                    adicionarItemNaLista(exercicio)
-                    alert('Exercicio deletado com sucesso!')
-                }
-                else{
-                    alert('Erro ao deletar exercicio!')
-                }  
-            }
+        alert('Exercicio deletado com sucesso!')
+    }
+    else {
+        alert('Erro ao deletar exercicio!')
+    }
+}
         }
     }
 }
 
 
-function adicionarItemNaLista(exercicio){
+function adicionarItemNaLista(exercicio) {
     const item_nome = document.createElement('td')
     const item_descricao = document.createElement('td')
     const modificar = document.createElement('td')
@@ -100,7 +84,7 @@ function adicionarItemNaLista(exercicio){
     modificar.innerHTML = `<button onclick="apagarExercicio(${exercicio.id})"><i class="fa-solid fa-pen-to-square"></i></button>`
     deletar.innerHTML = `<button ><i class="fa-solid fa-trash"></i></button>`
 
-    
+
     linha.appendChild(item_nome)
     linha.appendChild(item_descricao)
     linha.appendChild(modificar)
