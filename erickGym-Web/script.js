@@ -2,7 +2,7 @@ const cx_nome = document.getElementById('cx-nome')
 const cx_descricao = document.getElementById('cx-descricao')
 const btn_cadastro = document.getElementById('btn-cadastro')
 const list_exercicios = document.getElementById('list-exercicios')
-const API_URL = 'http://127.0.0.1:8000/exercicios/api'
+const API_URL = 'https://erick-gym.onrender.com/exercicios/api'
 
 
 function main(){
