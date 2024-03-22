@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from .models import Exercicio
 from .serializers import ExercicioSerializer
 from rest_framework import status
+from django.http import Http404
+
 
 # Create your views here.
 
@@ -22,6 +24,13 @@ class ListaExerciciosView(APIView):
             return Response(serializer.data, status=201)
         else:
             return Response(serializer.errors, status=400)
+        
+
+    def get_object(self, pk):
+        try:
+            return Exercicio.objects.get(pk=pk)
+        except Exercicio.DoesNotExist:
+            raise Http404
     
     
     def put(self, request, pk):
