@@ -52,6 +52,22 @@ async function salvarExercicio(e){
 
 }
 
+
+async function apagarExercicio(id){
+    const response = await fetch(API_URL)
+
+    if (response.status === 200){
+        const exercicios = await response.json()
+        for (let exercicio of exercicios){
+            if (exercicio.id === id){
+                
+            }
+        }
+    }
+
+}
+
+
 function adicionarItemNaLista(exercicio){
     const item_nome = document.createElement('td')
     const item_descricao = document.createElement('td')
@@ -61,8 +77,8 @@ function adicionarItemNaLista(exercicio){
 
     item_nome.innerText = `${exercicio.nome})`
     item_descricao.innerText = `${exercicio.descricao})`
-    modificar.innerHTML = '<button><i class="fa-solid fa-pen-to-square"></i></button>'
-    deletar.innerHTML = '<button><i class="fa-solid fa-trash"></i></button>'
+    modificar.innerHTML = `<button href="https://erick-gym.onrender.com/exercicios/api/modificar/${exercicio.id}"><i class="fa-solid fa-pen-to-square"></i></button>`
+    deletar.innerHTML = `<button href="https://erick-gym.onrender.com/exercicios/api/modificar/${exercicio.id}"><i class="fa-solid fa-trash"></i></button>`
     
     linha.appendChild(item_nome)
     linha.appendChild(item_descricao)
