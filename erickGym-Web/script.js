@@ -58,6 +58,7 @@ function adicionarItemNaLista(exercicio){
     const modificar = document.createElement('td')
     const deletar = document.createElement('td')
     const linha = document.createElement('tr')
+
     item_nome.innerText = `${exercicio.nome})`
     item_descricao.innerText = `${exercicio.descricao})`
     modificar.innerHTML = '<button><i class="fa-solid fa-pen-to-square"></i></button>'
@@ -67,6 +68,8 @@ function adicionarItemNaLista(exercicio){
     linha.appendChild(item_descricao)
     linha.appendChild(modificar)
     linha.appendChild(deletar)
+
+    table_exercicios.appendChild(linha)
 
 
     cx_nome.value = ''
