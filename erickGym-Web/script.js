@@ -6,6 +6,7 @@ const table_exercicios = document.getElementById('table-exercicios')
 const API_URL = 'https://erick-gym.onrender.com/exercicios/api'
 
 
+
 function main(){
     btn_cadastro.onclick = salvarExercicio
     carregarExerciciosAPI()
@@ -56,7 +57,7 @@ async function salvarExercicio(e){
 
 
 async function apagarExercicio(id){
-    const response = await fetch(API_URL)
+    const response = await fetch(`${API_URL}/deletar/${id}`)
 
     if (response.status === 200){
         const exercicios = await response.json()
@@ -96,8 +97,8 @@ function adicionarItemNaLista(exercicio){
 
     item_nome.innerText = `${exercicio.nome}`
     item_descricao.innerText = `${exercicio.descricao}`
-    modificar.innerHTML = `<button href="https://erick-gym.onrender.com/exercicios/api/modificar/${exercicio.id}"><i class="fa-solid fa-pen-to-square"></i></button>`
-    deletar.innerHTML = `<button href="https://erick-gym.onrender.com/exercicios/api/deletar/${exercicio.id}"><i class="fa-solid fa-trash"></i></button>`
+    modificar.innerHTML = `<button onclick="apagarExercicio(${exercicio.id})"><i class="fa-solid fa-pen-to-square"></i></button>`
+    deletar.innerHTML = `<button ><i class="fa-solid fa-trash"></i></button>`
 
     
     linha.appendChild(item_nome)
