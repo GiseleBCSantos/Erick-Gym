@@ -59,6 +59,8 @@ async function salvarExercicio(e) {
 async function apagarExercicio(id) {
     const response = await fetch(`${API_URL}/deletar/${id}`)
 
+    console.log(response.status)
+
     if (response.status === 204) {
 
         alert('Exercicio deletado com sucesso!')
@@ -77,34 +79,36 @@ async function modificarExercicio(id){
             if (exercicio.id === id){
                 cx_nome.value = exercicio.nome
                 cx_descricao.value = exercicio.descricao
-
-                const nome = cx_nome.value
-                const descricao = cx_descricao.value
-
-                const dados = { nome, descricao }
-
-                const config = {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(dados)
-                }
-            
-                const response = await fetch(API_URL, config)
-            
-                if (response.status === 201) {
-                    const exercicio = await response.json()
-                    adicionarItemNaLista(exercicio)
-                    alert('Exercicio modificado com sucesso!')
-                }
-                else {
-                    alert('Erro ao modificar exercicio!')
-                }
             }
+        }
+
+    const nome = cx_nome.value
+    const descricao = cx_descricao.value
+
+    const dados = { nome, descricao }
+
+    const config = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+        }
+            
+        const response = await fetch(API_URL, config)
+            
+        if (response.status === 201) {
+            const exercicio = await response.json()
+            adicionarItemNaLista(exercicio)
+            alert('Exercicio modificado com sucesso!')
+        }
+        else {
+            alert('Erro ao modificar exercicio!')
         }
     }
 }
+
+
 
 
         
