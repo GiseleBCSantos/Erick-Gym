@@ -64,7 +64,6 @@ async function apagarExercicio(id){
             }
         }
     }
-
 }
 
 
@@ -78,7 +77,8 @@ function adicionarItemNaLista(exercicio){
     item_nome.innerText = `${exercicio.nome})`
     item_descricao.innerText = `${exercicio.descricao})`
     modificar.innerHTML = `<button href="https://erick-gym.onrender.com/exercicios/api/modificar/${exercicio.id}"><i class="fa-solid fa-pen-to-square"></i></button>`
-    deletar.innerHTML = `<button href="https://erick-gym.onrender.com/exercicios/api/modificar/${exercicio.id}"><i class="fa-solid fa-trash"></i></button>`
+    deletar.innerHTML = `<button href="https://erick-gym.onrender.com/exercicios/api/deletar/${exercicio.id}"><i class="fa-solid fa-trash"></i></button>`
+
     
     linha.appendChild(item_nome)
     linha.appendChild(item_descricao)
