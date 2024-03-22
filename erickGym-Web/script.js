@@ -67,11 +67,9 @@ async function apagarExercicio(id) {
         alert('Erro ao deletar exercicio!')
     }
 }
-        }
-    }
-}
 
 
+        
 function adicionarItemNaLista(exercicio) {
     const item_nome = document.createElement('td')
     const item_descricao = document.createElement('td')
