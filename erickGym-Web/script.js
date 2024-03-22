@@ -2,6 +2,7 @@ const cx_nome = document.getElementById('cx-nome')
 const cx_descricao = document.getElementById('cx-descricao')
 const btn_cadastro = document.getElementById('btn-cadastro')
 const list_exercicios = document.getElementById('list-exercicios')
+const table_exercicios = document.getElementById('table-exercicios')
 const API_URL = 'https://erick-gym.onrender.com/exercicios/api'
 
 
@@ -22,7 +23,8 @@ async function carregarExerciciosAPI(){
 }
 
 
-async function salvarExercicio(){
+async function salvarExercicio(e){
+    e.preventDefault()
     const nome = cx_nome.value
     const descricao = cx_descricao.value
 
@@ -51,9 +53,21 @@ async function salvarExercicio(){
 }
 
 function adicionarItemNaLista(exercicio){
-    const item = document.createElement('li')
-    item.innerText = `${exercicio.nome} (${exercicio.descricao})`
-    list_exercicios.appendChild(item)
+    const item_nome = document.createElement('td')
+    const item_descricao = document.createElement('td')
+    const modificar = document.createElement('td')
+    const deletar = document.createElement('td')
+    const linha = document.createElement('tr')
+    item_nome.innerText = `${exercicio.nome})`
+    item_descricao.innerText = `${exercicio.descricao})`
+    modificar.innerHTML = '<button><i class="fa-solid fa-pen-to-square"></i></button>'
+    deletar.innerHTML = '<button><i class="fa-solid fa-trash"></i></button>'
+    
+    linha.appendChild(item_nome)
+    linha.appendChild(item_descricao)
+    linha.appendChild(modificar)
+    linha.appendChild(deletar)
+
 
     cx_nome.value = ''
     cx_descricao.value = ''
