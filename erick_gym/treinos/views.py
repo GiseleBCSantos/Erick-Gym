@@ -8,6 +8,11 @@ from django.http import Http404
 
 
 # Create your views here.
+class ListaExercicioView(APIView):
+    def get(self, request, pk):
+        exercicio = Exercicio.objects.get(pk=pk)
+        serializer = ExercicioSerializer(exercicio)
+        return Response(serializer.data, status=200)
 
 class ListaExerciciosView(APIView):
 
