@@ -16,6 +16,11 @@ class ListaExerciciosView(APIView):
         serializer = ExercicioSerializer(exercicios, many=True)
         return Response(serializer.data, status=200)
     
+    def get_one_object(self, request, pk):
+        exercicio = Exercicio.objects.get(pk=pk)
+        serializer = ExercicioSerializer(exercicio)
+        return Response(serializer.data, status=200)
+    
 
     def post(self, request):
         serializer = ExercicioSerializer(data=request.data)
