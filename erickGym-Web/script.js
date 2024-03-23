@@ -73,6 +73,7 @@ async function apagarExercicio(id) {
         console.log(response.status)
         if (response.status >= 200 && response.status < 300){
             alert('Excluído!')
+            window.location.href = 'index.html'
         }
         else{
             alert('Falha ao tentar excluir.')
@@ -101,6 +102,7 @@ function adicionarItemNaLista(exercicio) {
     item_descricao.innerText = `${exercicio.descricao}`
     modificar.innerHTML = `<button onclick="modificarExercicio(${exercicio.id})"><i class="fa-solid fa-pen-to-square"></i></button>`
     deletar.innerHTML = `<button onclick="apagarExercicio(${exercicio.id})"><i class="fa-solid fa-trash"></i></button>`
+    console.log(exercicio.id)
 
 
     linha.appendChild(item_nome)
