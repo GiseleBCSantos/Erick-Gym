@@ -62,105 +62,29 @@ async function salvarExercicio(e) {
 
 async function apagarExercicio(id) {
 
-    const response = await fetch(API_URL)
-    if (response.status === 200) {
-        const exercicios = await response.json()
-
-        for (let exercicio of exercicios) {
-            if (exercicio.id === id) {
-                const nome = exercicio.nome
-                const descricao = exercicio.descricao
-
-                const dados = { nome, descricao }
-
-                const config = {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(dados)
-                }
-
-                const response = await fetch(`${API_URL}/deletar/${id}`, config)
-
-                if (response.status === 204) {
-                    const exercicio = await response.json()
-                    adicionarItemNaLista(exercicio)
-                    alert('Exercicio modificado com sucesso!')
-                    alert(`Erro ${response.status}`)
-
-                }
-                else {
-                    alert('Erro ao modificar exercicio!')
-                    alert(`Erro ${response.status}`)
-                }
-            }
-
-
-
-
-            const response = await fetch(`${API_URL}/deletar/${id}`)
-
-            console.log(response.status)
-
-            if (response.status === 204) {
-
-                alert('Exercicio deletado com sucesso!')
-
-
-
-
-
-
-            }
-            else {
-                alert('Erro ao deletar exercicio!')
-            }
+    let options = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
         }
     }
+
+    fetch(`${API_URL}/deletar/${id}`, options).then(response => {
+        console.log(response.status)
+        if (response.status >= 200 && response.status < 300){
+            alert('Excluído!')
+        }
+        else{
+            alert('Falha ao tentar excluir.')
+        }
+    })
+    .catch(error => console.log)
 }
 
 
-async function modificarExercicio(id) {
-    const response = await fetch(API_URL)
-    if (response.status === 200) {
-        const exercicios = await response.json()
-        for (let exercicio of exercicios) {
-            if (exercicio.id === id) {
-                cx_nome.value = exercicio.nome
-                cx_descricao.value = exercicio.descricao
-
-                const nome = exercicio.nome
-                const descricao = exercicio.descricao
-
-                const dados = { nome, descricao }
-
-                const config = {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(dados)
-                }
-
-                const response = await fetch(API_URL, config)
-
-                if (response.status === 201) {
-                    const exercicio = await response.json()
-                    adicionarItemNaLista(exercicio)
-                    alert('Exercicio modificado com sucesso!')
-                }
-                else {
-                    alert('Erro ao modificar exercicio!')
-                }
-            }
-        }
-
-
-
-
-    }
-}
+// async function modificarExercicio(id) {
+    
+// }
 
 
 
