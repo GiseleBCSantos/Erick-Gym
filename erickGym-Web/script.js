@@ -45,12 +45,11 @@ async function salvarExercicio(e) {
         const exercicio = await response.json()
         adicionarItemNaLista(exercicio)
         alert('Exercicio cadastrado com sucesso!')
-        alert(`Erro ${response.status}`)
 
     }
     else {
         alert('Erro ao cadastrar exercicio!')
-        alert(`Erro ${response.status}`)
+        console.log(response.status)
 
     }
 
@@ -83,9 +82,47 @@ async function apagarExercicio(id) {
 }
 
 
-// async function modificarExercicio(id) {
-    
-// }
+async function iniciarModificarExercicio(id) {
+    let response = fetch(`${API_URL}/exercicios/api/obter/${id}`)
+    if (response.status === 200){
+        const exercicio = await response.json()
+        const nome = exercicio.nome
+        const descricao = exercicio.descricao
+
+        cx_nome.value = nome
+        cx_descricao.value = descricao
+        btn_cadastro.innerHTML = `<button onclick="modificarExercicio(${exercicio.id})">Atualizar</button>`
+    }
+    else{
+        alert(`Erro ${(await response).status}`)
+    }
+}
+
+
+async function modificarExercicio(id){
+    const novo_nome = cx_nome.value
+    const nova_descricao = cx_descricao.value
+
+    const dados = {novo_nome, nova_descricao}
+
+    const config = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+    }
+
+    if (btn_cadastro.value === 'Atualizar'){
+        let response = fetch(`${API_URL}/modificar/${id}`, config)
+        if (response.status === 200){
+            console.log('Exercicio modificado com sucesso.')
+        }
+        else{
+            console.log((await response).status)
+        }
+    }
+}
 
 
 
