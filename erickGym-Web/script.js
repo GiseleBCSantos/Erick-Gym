@@ -1,8 +1,8 @@
-const cx_nome = document.getElementBypk('cx-nome')
-const cx_descricao = document.getElementBypk('cx-descricao')
-const btn_cadastro = document.getElementBypk('btn-cadastro')
-const list_exercicios = document.getElementBypk('list-exercicios')
-const table_exercicios = document.getElementBypk('table-exercicios')
+const cx_nome = document.getElementById('cx-nome')
+const cx_descricao = document.getElementById('cx-descricao')
+const btn_cadastro = document.getElementById('btn-cadastro')
+const list_exercicios = document.getElementById('list-exercicios')
+const table_exercicios = document.getElementById('table-exercicios')
 const API_URL = 'https://erick-gym.onrender.com/exercicios/api'
 
 
@@ -164,9 +164,9 @@ function adicionarItemNaLista(exercicio) {
 
     item_nome.innerText = `${exercicio.nome}`
     item_descricao.innerText = `${exercicio.descricao}`
-    modificar.innerHTML = `<button onclick="iniciarModificarExercicio(${exercicio.pk})"><i class="fa-solpk fa-pen-to-square"></i></button>`
-    deletar.innerHTML = `<button onclick="apagarExercicio(${exercicio.pk})"><i class="fa-solpk fa-trash"></i></button>`
-    console.log(exercicio.pk)
+    modificar.innerHTML = `<button onclick="iniciarModificarExercicio(${exercicio.id})"><i class="fa-solpk fa-pen-to-square"></i></button>`
+    deletar.innerHTML = `<button onclick="apagarExercicio(${exercicio.id})"><i class="fa-solpk fa-trash"></i></button>`
+    console.log(exercicio.id)
 
 
     linha.appendChild(item_nome)
