@@ -58,9 +58,7 @@ async function salvarExercicio(e) {
 
 
 
-async function apagarExercicio(e, id) {
-    e.preventDefault()
-
+async function apagarExercicio(id) {
     const config = {
         method: 'DELETE',
         headers: {
