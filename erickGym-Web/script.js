@@ -56,12 +56,6 @@ async function salvarExercicio(e) {
 
 }
 
-function modificarBotao() {
-
-    btn_cadastro.innerHTML = 'Atualizar';
-    btn_cadastro.onclick = iniciarModificarExercicio(id)
-
-}
 
 
 async function apagarExercicio(id) {
@@ -125,10 +119,11 @@ async function modificarExercicio(id) {
         body: JSON.stringify(dados)
     }
 
+    console.log(novo_nome, nova_descricao, id)
 
 
     await fetch(`${API_URL}/modificar/${id}`, config).then(response => {
-        if (response.status == 201){
+        if (response.status >= 200 && response.status < 300){
             window.location.href = 'index.html'
             console.log('Exercicio modificado com sucesso.')
             btn_cadastro.innerText = 'Cadastro'
