@@ -78,7 +78,7 @@ async function apagarExercicio(id) {
     //     alert('Falha ao tentar excluir.')
     // }
 
-    await fetch(`${API_URL}/deletar/${id}`, options).then(response => {
+    await fetch(`${API_URL}/deletar/${id}`, config).then(response => {
         console.log(response.status)
         if (response.status >= 200 && response.status < 300){
             alert('Excluído!')
