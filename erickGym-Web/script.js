@@ -71,6 +71,7 @@ async function apagarExercicio(id) {
         console.log(response.status)
         if (response.status >= 200 && response.status < 300) {
             alert('Excluído!')
+            window.location.href = 'index.html'
         }
         else {
             alert('Falha ao tentar excluir.')
@@ -125,6 +126,7 @@ function modificarExercicio(id) {
             console.log('Exercicio modificado com sucesso.')
             btn_cadastro.innerText = 'Cadastro'
             btn_cadastro.setAttribute('onclick', 'salvarExercicio()')
+            window.location.href = 'index.html'
         }
         else{
             console.log(response.status)
