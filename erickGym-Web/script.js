@@ -83,7 +83,7 @@ async function apagarExercicio(id) {
 
 
 async function iniciarModificarExercicio(id) {
-    let response = fetch(`${API_URL}/exercicios/api/obter/${id}`)
+    let response = fetch(`${API_URL}/obter/${id}`)
     if (response.status === 200){
         const exercicio = await response.json()
         const nome = exercicio.nome
