@@ -7,7 +7,6 @@ const API_URL = 'https://erick-gym.onrender.com/exercicios/api'
 
 
 
-const id = null;
 
 function main() {
     btn_cadastro.onclick = salvarExercicio
@@ -74,15 +73,6 @@ async function apagarExercicio(id) {
         }
     }
     
-    // const response = await fetch(`${API_URL}/deletar/${id}`, config)
-    // console.log(response.status)
-    // if (response.status === 200 && response.status < 300){
-    //     alert('Excluido!')
-    //     window.location.href = 'index.html'
-    // }
-    // else{
-    //     alert('Falha ao tentar excluir.')
-    // }
 
     await fetch(`${API_URL}/deletar/${id}`, config).then(response => {
         console.log(response.status)
@@ -107,8 +97,8 @@ async function iniciarModificarExercicio(id) {
 
         cx_nome.value = nome
         cx_descricao.value = descricao
-        btn_cadastro.innerHTML = 'Atualizar'
-        btn_cadastro.onclick = modificarExercicio(id)
+        btn_cadastro.innerText = 'Atualizar'
+        btn_cadastro.setAttribute('onclick', `modificarExercicio(${id})`)
     }
     else{
         alert(`Erro ${response.status}`)
@@ -138,6 +128,8 @@ async function modificarExercicio(id){
         if (response.status === 200){
             window.location.href = 'index.html'
             console.log('Exercicio modificado com sucesso.')
+            btn_cadastro.innerText = 'Cadastro'
+            btn_cadastro.setAttribute('onclick', 'carregarExerciciosAPI()')
         }
         else{
             console.log(response.status)
