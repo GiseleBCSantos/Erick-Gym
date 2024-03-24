@@ -68,7 +68,6 @@ async function apagarExercicio(id) {
 
 
     await fetch(`${API_URL}/deletar/${id}`, config).then(response => {
-        console.log(response.status)
         if (response.status >= 200 && response.status < 300) {
             alert('Excluído!')
             window.location.href = 'index.html'
@@ -78,6 +77,12 @@ async function apagarExercicio(id) {
         }
     })
         .catch(error => console.log)
+}
+
+function voltarCadastro(){
+    btn_cadastro.value = 'Cadastro Exercício'
+    btn_cadastro.innerText = 'Cadastro'
+    btn_cadastro.setAttribute('onclick', 'salvarExercicio()')
 }
 
 
@@ -91,8 +96,11 @@ async function iniciarModificarExercicio(id) {
         cx_nome.value = nome
         cx_descricao.value = descricao
         btn_cadastro.innerText = 'Atualizar'
+        btn_cadastro.value = 'Atualizar Exercício'
         btn_cadastro.setAttribute('onclick', `modificarExercicio(${id})`)
-        console.log('onclick atribuido')
+
+        let btn_cancelar_att = document.createElement('button')
+        btn_cancelar_att.innerHTML = '<button class="btn btn-primary" onclick="voltarCadastro()">Cancelar Atualização</button>'
     }
     else {
         alert(`Erro ${response.status}`)
@@ -100,15 +108,11 @@ async function iniciarModificarExercicio(id) {
 }
 
 
-
-
-
 async function modificarExercicio(id) {
-    console.log('onclick funcionando')
-    const novo_nome = cx_nome.value
-    const nova_descricao = cx_descricao.value
+    const nome = cx_nome.value
+    const descricao = cx_descricao.value
 
-    const dados = { nome:novo_nome, descricao:nova_descricao }
+    const dados = { nome, descricao }
 
     const options = {
         method: 'PUT',
@@ -118,38 +122,18 @@ async function modificarExercicio(id) {
         body: JSON.stringify(dados)
     }
 
-    console.log(novo_nome, nova_descricao, id)
 
 
     await fetch(`${API_URL}/modificar/${id}`, options).then(response => {
         if (response.status >= 200 && response.status < 300){
-            console.log('Exercicio modificado com sucesso.')
-            btn_cadastro.innerText = 'Cadastro'
-            btn_cadastro.setAttribute('onclick', 'salvarExercicio()')
+            voltarCadastro()
             window.location.href = 'index.html'
         }
         else{
             console.log(response.status)
-            console.log(options)
-            console.log(JSON.stringify(dados))
         }
     })
         .catch(error => console.log)
-
-
-
-    // let response = await fetch(`${API_URL}/modificar/${id}`, config)
-
-
-    // if (response.status === 200) {
-    //     window.location.href = 'index.html'
-    //     console.log('Exercicio modificado com sucesso.')
-    //     btn_cadastro.innerText = 'Cadastro'
-    //     btn_cadastro.setAttribute('onclick', 'carregarExerciciosAPI()')
-    // }
-    // else {
-    //     console.log(response.status)
-    // }
 }
 
 
@@ -165,9 +149,8 @@ function adicionarItemNaLista(exercicio) {
 
     item_nome.innerText = `${exercicio.nome}`
     item_descricao.innerText = `${exercicio.descricao}`
-    modificar.innerHTML = `<button onclick="iniciarModificarExercicio(${exercicio.id})"><i class="fa-solid fa-pen-to-square"></i></button>`
-    deletar.innerHTML = `<button onclick="apagarExercicio(${exercicio.id})"><i class="fa-solid fa-trash"></i></button>`
-    console.log(exercicio.id)
+    modificar.innerHTML = `<button class="btn btn-warning" onclick="iniciarModificarExercicio(${exercicio.id})"><i class="fa-solid fa-pen-to-square"></i></button>`
+    deletar.innerHTML = `<button class="btn btn-danger" onclick="apagarExercicio(${exercicio.id})"><i class="fa-solid fa-trash"></i></button>`
 
 
     linha.appendChild(item_nome)
