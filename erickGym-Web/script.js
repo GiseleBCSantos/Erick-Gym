@@ -7,6 +7,8 @@ const API_URL = 'https://erick-gym.onrender.com/exercicios/api'
 
 
 
+const id = null;
+
 function main() {
     btn_cadastro.onclick = salvarExercicio
     carregarExerciciosAPI()
@@ -53,10 +55,14 @@ async function salvarExercicio(e) {
 
     }
 
-
 }
 
+function modificarBotao() {
 
+    btn_cadastro.innerHTML = 'Atualizar';
+    btn_cadastro.onclick = iniciarModificarExercicio(id)
+
+}
 
 
 async function apagarExercicio(id) {
@@ -101,12 +107,16 @@ async function iniciarModificarExercicio(id) {
 
         cx_nome.value = nome
         cx_descricao.value = descricao
-        btn_cadastro.innerHTML = `<button onclick="modificarExercicio(${exercicio.id})">Atualizar</button>`
+        btn_cadastro.value = 'Atualizar'
+        btn_cadastro.onclick = modificarExercicio(id)
     }
     else{
         alert(`Erro ${response.status}`)
     }
 }
+
+
+
 
 
 async function modificarExercicio(id){
@@ -126,6 +136,7 @@ async function modificarExercicio(id){
     if (btn_cadastro.value === 'Atualizar'){
         let response = fetch(`${API_URL}/modificar/${id}`, config)
         if (response.status === 200){
+            window.location.href = 'index.html'
             console.log('Exercicio modificado com sucesso.')
         }
         else{
