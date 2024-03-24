@@ -104,8 +104,7 @@ async function iniciarModificarExercicio(id) {
 
 
 
-async function modificarExercicio(e,id) {
-    e.preventDefault()
+async function modificarExercicio(id) {
     console.log('onclick funcionando')
     const novo_nome = cx_nome.value
     const nova_descricao = cx_descricao.value
