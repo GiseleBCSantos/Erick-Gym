@@ -61,29 +61,39 @@ async function salvarExercicio(e) {
 
 async function apagarExercicio(id) {
 
-    let options = {
+    let config = {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         }
     }
+    
+    const response = await fetch(`${API_URL}/deletar/id`, config)
+    console.log(response.status)
+    if (response.status === 200 && response.status < 300){
+        alert('Excluido!')
+        window.location.href = 'index.html'
+    }
+    else{
+        alert('Falha ao tentar excluir.')
+    }
 
-    fetch(`${API_URL}/deletar/${id}`, options).then(response => {
-        console.log(response.status)
-        if (response.status >= 200 && response.status < 300){
-            alert('Excluído!')
-            window.location.href = 'index.html'
-        }
-        else{
-            alert('Falha ao tentar excluir.')
-        }
-    })
-    .catch(error => console.log)
+    // await fetch(`${API_URL}/deletar/${id}`, options).then(response => {
+    //     console.log(response.status)
+    //     if (response.status >= 200 && response.status < 300){
+    //         alert('Excluído!')
+    //         window.location.href = 'index.html'
+    //     }
+    //     else{
+    //         alert('Falha ao tentar excluir.')
+    //     }
+    // })
+    // .catch(error => console.log)
 }
 
 
 async function iniciarModificarExercicio(id) {
-    let response = fetch(`${API_URL}/obter/${id}`)
+    let response = await fetch(`${API_URL}/obter/${id}`)
     if (response.status === 200){
         const exercicio = await response.json()
         const nome = exercicio.nome
@@ -94,7 +104,7 @@ async function iniciarModificarExercicio(id) {
         btn_cadastro.innerHTML = `<button onclick="modificarExercicio(${exercicio.id})">Atualizar</button>`
     }
     else{
-        alert(`Erro ${(await response).status}`)
+        alert(`Erro ${response.status}`)
     }
 }
 
