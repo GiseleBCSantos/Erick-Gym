@@ -125,16 +125,35 @@ async function modificarExercicio(id) {
         body: JSON.stringify(dados)
     }
 
-    let response = await fetch(`${API_URL}/modificar/${id}`, config)
-    if (response.status === 200) {
-        window.location.href = 'index.html'
-        console.log('Exercicio modificado com sucesso.')
-        btn_cadastro.innerText = 'Cadastro'
-        btn_cadastro.setAttribute('onclick', 'carregarExerciciosAPI()')
-    }
-    else {
-        console.log(response.status)
-    }
+
+
+    await fetch(`${API_URL}/modificar/${id}`, config).then(response => {
+        if (response.status == 201){
+            window.location.href = 'index.html'
+            console.log('Exercicio modificado com sucesso.')
+            btn_cadastro.innerText = 'Cadastro'
+            btn_cadastro.setAttribute('onclick', 'carregarExerciciosAPI()')
+        }
+        else{
+            console.log(response.status)
+        }
+    })
+        .catch(error => console.log)
+
+
+
+    // let response = await fetch(`${API_URL}/modificar/${id}`, config)
+
+
+    // if (response.status === 200) {
+    //     window.location.href = 'index.html'
+    //     console.log('Exercicio modificado com sucesso.')
+    //     btn_cadastro.innerText = 'Cadastro'
+    //     btn_cadastro.setAttribute('onclick', 'carregarExerciciosAPI()')
+    // }
+    // else {
+    //     console.log(response.status)
+    // }
 }
 
 
