@@ -103,7 +103,7 @@ async function iniciarModificarExercicio(id) {
 
 
 
-function modificarExercicio(id) {
+async function modificarExercicio(id) {
     console.log('onclick funcionando')
     const novo_nome = cx_nome.value
     const nova_descricao = cx_descricao.value
@@ -121,7 +121,7 @@ function modificarExercicio(id) {
     console.log(novo_nome, nova_descricao, id)
 
 
-    fetch(`${API_URL}/modificar/${id}`, options).then(response => {
+    await fetch(`${API_URL}/modificar/${id}`, options).then(response => {
         if (response.status >= 200 && response.status < 300){
             console.log('Exercicio modificado com sucesso.')
             btn_cadastro.innerText = 'Cadastro'
