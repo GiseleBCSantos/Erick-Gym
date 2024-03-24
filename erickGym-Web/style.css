@@ -20,3 +20,7 @@ input{
     border-bottom: 1px dotted grey;
 }
 
+table tr{
+    margin-bottom: 5px;
+}
+
