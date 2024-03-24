@@ -130,6 +130,8 @@ async function modificarExercicio(id) {
         }
         else{
             console.log(response.status)
+            console.log(options)
+            console.log(JSON.stringify(dados))
         }
     })
         .catch(error => console.log)
