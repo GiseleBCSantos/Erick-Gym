@@ -72,25 +72,25 @@ async function apagarExercicio(id) {
             'Content-Type': 'application/json'
         }
     }
-    
+
 
     await fetch(`${API_URL}/deletar/${id}`, config).then(response => {
         console.log(response.status)
-        if (response.status >= 200 && response.status < 300){
+        if (response.status >= 200 && response.status < 300) {
             alert('Excluído!')
             window.location.href = 'index.html'
         }
-        else{
+        else {
             alert('Falha ao tentar excluir.')
         }
     })
-    .catch(error => console.log)
+        .catch(error => console.log)
 }
 
 
 async function iniciarModificarExercicio(id) {
     let response = await fetch(`${API_URL}/obter/${id}`)
-    if (response.status === 200){
+    if (response.status === 200) {
         const exercicio = await response.json()
         const nome = exercicio.nome
         const descricao = exercicio.descricao
@@ -99,8 +99,9 @@ async function iniciarModificarExercicio(id) {
         cx_descricao.value = descricao
         btn_cadastro.innerText = 'Atualizar'
         btn_cadastro.setAttribute('onclick', `modificarExercicio(${id})`)
+        console.log('onclick atribuido')
     }
-    else{
+    else {
         alert(`Erro ${response.status}`)
     }
 }
@@ -109,11 +110,12 @@ async function iniciarModificarExercicio(id) {
 
 
 
-async function modificarExercicio(id){
+async function modificarExercicio(id) {
+    console.log('onclick funcionando')
     const novo_nome = cx_nome.value
     const nova_descricao = cx_descricao.value
 
-    const dados = {novo_nome, nova_descricao}
+    const dados = { novo_nome, nova_descricao }
 
     const config = {
         method: 'PUT',
@@ -123,17 +125,15 @@ async function modificarExercicio(id){
         body: JSON.stringify(dados)
     }
 
-    if (btn_cadastro.value === 'Atualizar'){
-        let response = await fetch(`${API_URL}/modificar/${id}`, config)
-        if (response.status === 200){
-            window.location.href = 'index.html'
-            console.log('Exercicio modificado com sucesso.')
-            btn_cadastro.innerText = 'Cadastro'
-            btn_cadastro.setAttribute('onclick', 'carregarExerciciosAPI()')
-        }
-        else{
-            console.log(response.status)
-        }
+    let response = await fetch(`${API_URL}/modificar/${id}`, config)
+    if (response.status === 200) {
+        window.location.href = 'index.html'
+        console.log('Exercicio modificado com sucesso.')
+        btn_cadastro.innerText = 'Cadastro'
+        btn_cadastro.setAttribute('onclick', 'carregarExerciciosAPI()')
+    }
+    else {
+        console.log(response.status)
     }
 }
 
