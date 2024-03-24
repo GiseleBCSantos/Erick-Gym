@@ -107,7 +107,7 @@ async function iniciarModificarExercicio(id) {
 
         cx_nome.value = nome
         cx_descricao.value = descricao
-        btn_cadastro.value = 'Atualizar'
+        btn_cadastro.innerHTML = 'Atualizar'
         btn_cadastro.onclick = modificarExercicio(id)
     }
     else{
