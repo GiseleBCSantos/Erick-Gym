@@ -82,7 +82,8 @@ async function apagarExercicio(e, id) {
 }
 
 
-async function iniciarModificarExercicio(id) {
+async function iniciarModificarExercicio(e, id) {
+    e.preventDefault()
     let response = await fetch(`${API_URL}/obter/${id}`)
     if (response.status === 200) {
         const exercicio = await response.json()
