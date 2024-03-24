@@ -134,13 +134,13 @@ async function modificarExercicio(id){
     }
 
     if (btn_cadastro.value === 'Atualizar'){
-        let response = fetch(`${API_URL}/modificar/${id}`, config)
+        let response = await fetch(`${API_URL}/modificar/${id}`, config)
         if (response.status === 200){
             window.location.href = 'index.html'
             console.log('Exercicio modificado com sucesso.')
         }
         else{
-            console.log((await response).status)
+            console.log(response.status)
         }
     }
 }
