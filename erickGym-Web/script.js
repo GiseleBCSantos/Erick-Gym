@@ -104,14 +104,14 @@ async function iniciarModificarExercicio(id) {
 
 
 
-async function modificarExercicio(id) {
+function modificarExercicio(id) {
     console.log('onclick funcionando')
     const novo_nome = cx_nome.value
     const nova_descricao = cx_descricao.value
 
     const dados = { novo_nome, nova_descricao }
 
-    const config = {
+    const options = {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -122,7 +122,7 @@ async function modificarExercicio(id) {
     console.log(novo_nome, nova_descricao, id)
 
 
-    await fetch(`${API_URL}/modificar/${id}`, config).then(response => {
+    fetch(`${API_URL}/modificar/${id}`, options).then(response => {
         if (response.status >= 200 && response.status < 300){
             console.log('Exercicio modificado com sucesso.')
             btn_cadastro.innerText = 'Cadastro'
