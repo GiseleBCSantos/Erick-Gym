@@ -58,7 +58,8 @@ async function salvarExercicio(e) {
 
 
 
-async function apagarExercicio(id) {
+async function apagarExercicio(e, id) {
+    e.preventDefault()
 
     const config = {
         method: 'DELETE',
@@ -72,7 +73,6 @@ async function apagarExercicio(id) {
         console.log(response.status)
         if (response.status >= 200 && response.status < 300) {
             alert('Excluído!')
-            window.location.href = 'index.html'
         }
         else {
             alert('Falha ao tentar excluir.')
@@ -104,7 +104,8 @@ async function iniciarModificarExercicio(id) {
 
 
 
-async function modificarExercicio(id) {
+async function modificarExercicio(e,id) {
+    e.preventDefault()
     console.log('onclick funcionando')
     const novo_nome = cx_nome.value
     const nova_descricao = cx_descricao.value
@@ -124,7 +125,6 @@ async function modificarExercicio(id) {
 
     await fetch(`${API_URL}/modificar/${id}`, config).then(response => {
         if (response.status >= 200 && response.status < 300){
-            window.location.href = 'index.html'
             console.log('Exercicio modificado com sucesso.')
             btn_cadastro.innerText = 'Cadastro'
             btn_cadastro.setAttribute('onclick', 'salvarExercicio()')
