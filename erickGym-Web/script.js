@@ -105,10 +105,10 @@ async function iniciarModificarExercicio(id) {
 
 async function modificarExercicio(id) {
     console.log('onclick funcionando')
-    const nome = cx_nome.value
-    const descricao = cx_descricao.value
+    const novo_nome = cx_nome.value
+    const nova_descricao = cx_descricao.value
 
-    const dados = { nome, nome }
+    const dados = { nome:novo_nome, descricao:nova_descricao }
 
     const options = {
         method: 'PUT',
