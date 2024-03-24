@@ -58,9 +58,9 @@ async function salvarExercicio(e) {
 
 
 
-async function apagarExercicio(pk) {
+async function apagarExercicio(id) {
 
-    let config = {
+    const config = {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -68,7 +68,7 @@ async function apagarExercicio(pk) {
     }
 
 
-    await fetch(`${API_URL}/deletar/${pk}`, config).then(response => {
+    await fetch(`${API_URL}/deletar/${id}`, config).then(response => {
         console.log(response.status)
         if (response.status >= 200 && response.status < 300) {
             alert('Excluído!')
@@ -82,8 +82,8 @@ async function apagarExercicio(pk) {
 }
 
 
-async function iniciarModificarExercicio(pk) {
-    let response = await fetch(`${API_URL}/obter/${pk}`)
+async function iniciarModificarExercicio(id) {
+    let response = await fetch(`${API_URL}/obter/${id}`)
     if (response.status === 200) {
         const exercicio = await response.json()
         const nome = exercicio.nome
@@ -92,8 +92,8 @@ async function iniciarModificarExercicio(pk) {
         cx_nome.value = nome
         cx_descricao.value = descricao
         btn_cadastro.innerText = 'Atualizar'
-        btn_cadastro.setAttribute('onclick', `modificarExercicio(${pk})`)
-        console.log('onclick atribupko')
+        btn_cadastro.setAttribute('onclick', `modificarExercicio(${id})`)
+        console.log('onclick atribuido')
     }
     else {
         alert(`Erro ${response.status}`)
@@ -104,7 +104,7 @@ async function iniciarModificarExercicio(pk) {
 
 
 
-async function modificarExercicio(pk) {
+async function modificarExercicio(id) {
     console.log('onclick funcionando')
     const novo_nome = cx_nome.value
     const nova_descricao = cx_descricao.value
@@ -119,15 +119,15 @@ async function modificarExercicio(pk) {
         body: JSON.stringify(dados)
     }
 
-    console.log(novo_nome, nova_descricao, pk)
+    console.log(novo_nome, nova_descricao, id)
 
 
-    await fetch(`${API_URL}/modificar/${pk}`, config).then(response => {
+    await fetch(`${API_URL}/modificar/${id}`, config).then(response => {
         if (response.status >= 200 && response.status < 300){
             window.location.href = 'index.html'
             console.log('Exercicio modificado com sucesso.')
             btn_cadastro.innerText = 'Cadastro'
-            btn_cadastro.setAttribute('onclick', 'carregarExerciciosAPI()')
+            btn_cadastro.setAttribute('onclick', 'salvarExercicio()')
         }
         else{
             console.log(response.status)
@@ -137,7 +137,7 @@ async function modificarExercicio(pk) {
 
 
 
-    // let response = await fetch(`${API_URL}/modificar/${pk}`, config)
+    // let response = await fetch(`${API_URL}/modificar/${id}`, config)
 
 
     // if (response.status === 200) {
@@ -164,8 +164,8 @@ function adicionarItemNaLista(exercicio) {
 
     item_nome.innerText = `${exercicio.nome}`
     item_descricao.innerText = `${exercicio.descricao}`
-    modificar.innerHTML = `<button onclick="iniciarModificarExercicio(${exercicio.id})"><i class="fa-solpk fa-pen-to-square"></i></button>`
-    deletar.innerHTML = `<button onclick="apagarExercicio(${exercicio.id})"><i class="fa-solpk fa-trash"></i></button>`
+    modificar.innerHTML = `<button onclick="iniciarModificarExercicio(${exercicio.id})"><i class="fa-solid fa-pen-to-square"></i></button>`
+    deletar.innerHTML = `<button onclick="apagarExercicio(${exercicio.id})"><i class="fa-solid fa-trash"></i></button>`
     console.log(exercicio.id)
 
 
