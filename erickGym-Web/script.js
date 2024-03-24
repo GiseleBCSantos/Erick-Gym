@@ -68,27 +68,27 @@ async function apagarExercicio(id) {
         }
     }
     
-    const response = await fetch(`${API_URL}/deletar/${id}`, config)
-    console.log(response.status)
-    if (response.status === 200 && response.status < 300){
-        alert('Excluido!')
-        window.location.href = 'index.html'
-    }
-    else{
-        alert('Falha ao tentar excluir.')
-    }
+    // const response = await fetch(`${API_URL}/deletar/${id}`, config)
+    // console.log(response.status)
+    // if (response.status === 200 && response.status < 300){
+    //     alert('Excluido!')
+    //     window.location.href = 'index.html'
+    // }
+    // else{
+    //     alert('Falha ao tentar excluir.')
+    // }
 
-    // await fetch(`${API_URL}/deletar/${id}`, options).then(response => {
-    //     console.log(response.status)
-    //     if (response.status >= 200 && response.status < 300){
-    //         alert('Excluído!')
-    //         window.location.href = 'index.html'
-    //     }
-    //     else{
-    //         alert('Falha ao tentar excluir.')
-    //     }
-    // })
-    // .catch(error => console.log)
+    await fetch(`${API_URL}/deletar/${id}`, options).then(response => {
+        console.log(response.status)
+        if (response.status >= 200 && response.status < 300){
+            alert('Excluído!')
+            window.location.href = 'index.html'
+        }
+        else{
+            alert('Falha ao tentar excluir.')
+        }
+    })
+    .catch(error => console.log)
 }
 
 
