@@ -16,12 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from treinos.views import ListaExerciciosView, ListaExercicioView
+from treinos.views import ListaExerciciosView, ListaExercicioView, ModificarExercicioView
 
 urlpatterns = [
     path('exercicios/api', ListaExerciciosView.as_view()),
     path('exercicios/api/obter/<int:pk>', ListaExercicioView.as_view()),
-    path('exercicios/api/modificar/<int:pk>', ListaExerciciosView.as_view()),
+    path('exercicios/api/modificar/<int:pk>', ModificarExercicioView.as_view()),
     path('exercicios/api/deletar/<int:pk>', ListaExerciciosView.as_view()),
     path('admin/', admin.site.urls),
 ]

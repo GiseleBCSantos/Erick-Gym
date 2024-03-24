@@ -56,3 +56,20 @@ class ListaExerciciosView(APIView):
         alvo = self.get_object(pk)
         alvo.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+
+class ModificarExercicioView(APIView):
+    def get_object(self, pk):
+        try:
+            return Exercicio.objects.get(pk=pk)
+        except Exercicio.DoesNotExist:
+            raise Http404
+        
+    
+    def put(self, request, pk):
+        alvo = self.get_object(pk)
+        serializer = ExercicioSerializer(alvo, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
