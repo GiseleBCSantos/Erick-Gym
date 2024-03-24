@@ -137,7 +137,7 @@ function adicionarItemNaLista(exercicio) {
 
     item_nome.innerText = `${exercicio.nome}`
     item_descricao.innerText = `${exercicio.descricao}`
-    modificar.innerHTML = `<button onclick="modificarExercicio(${exercicio.id})"><i class="fa-solid fa-pen-to-square"></i></button>`
+    modificar.innerHTML = `<button onclick="iniciarModificarExercicio(${exercicio.id})"><i class="fa-solid fa-pen-to-square"></i></button>`
     deletar.innerHTML = `<button onclick="apagarExercicio(${exercicio.id})"><i class="fa-solid fa-trash"></i></button>`
     console.log(exercicio.id)
 
